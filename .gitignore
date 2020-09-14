@@ -1,0 +1,50 @@
+# data files
+# data/classes.json
+# data/properties.json
+# data/statistics.json
+# data/properties/*.json
+# data/classes/*.json
+
+flask_data/*
+es_data/*
+# python bytecode cache
+*.pyc
+
+# osx
+.DS_Store
+
+# dependencies & built assets
+node_modules
+/dist
+package-lock.json
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+#*#
+*~
+flycheck_*.*
+public/oauth/vendor/
+
+helpers/java/dependency-reduced-pom.xml
+helpers/java/target
+helpers/java/.classpath
+helpers/java/.project
+helpers/java/.settings
+helpers/java/dumpfiles
+/.project
+.log
