@@ -6,16 +6,16 @@ ELASTICSEARCH_HOST = "localhost"
 MOCK_CLASSIFICATION = {}
 
 PROPERTY_FILES = [
-    "flask_data/macroscore_0827_properties.tsv",
+    # "flask_data/macroscore_0827_properties.tsv",
     "flask_data/wikidata_properties.tsv"
 ]
 
-ES_INDEX = "macroscore"
-SPARQL_ENDPOINT = 'http://localhost:14000/bigdata/namespace/wdq/sparql'
+ES_INDEX = "kgtk"
+SPARQL_ENDPOINT = 'http://localhost:10002/bigdata/namespace/wdq/sparql'
 
 #Flask Port
 PORT = 5556
 HOST = "0.0.0.0"
 
 # SQID domain
-DOMAIN = "http://sitaware.isi.edu:8051/"
+DOMAIN = "http://localhost:8051/"

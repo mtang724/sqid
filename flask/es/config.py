@@ -1,6 +1,6 @@
 ELASTICSEARCH_HOST = "localhost"
-INDEX = "macroscore"
-DATA_FOLDER_PATH = "/nas/home/rli/macroscore/demo_integrated/sqid/flask/es/es_data"
+INDEX = "kgtk"
+DATA_FOLDER_PATH = "/instancestore/sqid/flask/es/es_data"
 MAPPING_FILE = {
     "mappings": {
         # mapping type has been removed in elasticsearch7
