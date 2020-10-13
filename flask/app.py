@@ -17,6 +17,7 @@ log.setLevel(logging.ERROR)
 
 print("# Begin Loading Property File Info")
 for file in PROPERTY_FILES:
+    print (file)
     MOCK_CLASSIFICATION.update(build_classifications(file))
 print("# Done Loading Property File Info")
 es = Elasticsearch(ELASTICSEARCH_HOST)
