@@ -1,6 +1,6 @@
 export const commonsEndpoint = 'https://commons.wikimedia.org/w/api.php' // for image
 export const wikidataEndpoint = 'http://localhost:5556/entity/'
-export const sparqlEndpoint = 'http://slocalhost:5556/sparql/'
+export const sparqlEndpoint = 'http://localhost:5556/sparql/'
 export const sqidEndpoint = 'http://localhost:5556/data'
 export const customDomain = 'http://localhost:8051'
 
