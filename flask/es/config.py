@@ -1,6 +1,6 @@
 ELASTICSEARCH_HOST = "localhost:9200"
-INDEX = "kgtk"
-DATA_FOLDER_PATH = "~/sqid/flask/es/es_data"
+INDEX = "kgtk_files"
+DATA_FOLDER_PATH = "/home/mingyuet/sqid/flask/es/es_data"
 MAPPING_FILE = {
     "mappings": {
         # mapping type has been removed in elasticsearch7
