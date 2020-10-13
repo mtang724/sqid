@@ -83,7 +83,9 @@ def _data_proxy(*args, **kwargs):
 @app.route("/entity/", methods=["GET"])
 def _wiki_proxy(*args, **kwargs):
     parsed_url = urlparse(request.url)
+    print (parsed_url)
     queries = parse_qs(parsed_url.query)
+    print (queries)
     action = queries["action"][0]
     if action == "wbgetentities":
         keys = queries["ids"][0].split("|")
