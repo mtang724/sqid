@@ -1,4 +1,4 @@
-ELASTICSEARCH_HOST = "localhost"
+ELASTICSEARCH_HOST = "localhost:9200"
 INDEX = "kgtk"
 DATA_FOLDER_PATH = "/instancestore/sqid/flask/es/es_data"
 MAPPING_FILE = {
