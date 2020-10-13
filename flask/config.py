@@ -10,7 +10,7 @@ PROPERTY_FILES = [
     "flask_data/wikidata_properties.tsv"
 ]
 
-ES_INDEX = "tl_ind"
+ES_INDEX = "kgtk_files"
 SPARQL_ENDPOINT = 'http://localhost:10002/proxy/wdqs/bigdata/namespace/wdq/sparql'
 
 #Flask Port

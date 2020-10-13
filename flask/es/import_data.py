@@ -14,7 +14,8 @@ for json_file in tqdm(json_files):
         for idx, js in tqdm(enumerate(fp)):
             doc = list(json.loads(js).values())[0]
             docs.append(doc)
-            if idx != 0 and idx%10000 == 0:
+            if idx !=0 and idx%10 == 0:
                 res = helpers.bulk(client,actions=docs,index=INDEX)
+                print(res)
                 print("loaded {}".format(idx))
                 docs = []

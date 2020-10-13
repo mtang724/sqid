@@ -96,7 +96,7 @@
     "propertyInReference": "Uses in references"
   },
   "home": {
-    "home": "SQID interface for Macroscore Data",
+    "home": "SQID interface for KGTK Data",
     "description": "SQID is a fast way to browse and query {kg}.",
     "kg": "customizable knowledge graph",
     "reasonator": "Reasonator",
