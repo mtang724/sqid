@@ -319,13 +319,20 @@ cd flask/es/ && python create_index.py
 - Import all .jsonl files stored in the DATA_FOLDER_PATH variable (canbe configured in global_config.py). The loading is in bulk (flask/es/import_data.py)
 
 ```python
-# mediawiki json files path(es_data) is defined in global_config file
+# mediawiki json files path (es_data) is defined in global_config file
 cd flask/es/ && python import_data.py
 ```
 
 ### Start **Flask app** (python flask/app.py) first then Start **SQID** (npm run serve)
 
-Modify endpoints in global_config.py (https://github.com/mtang724/sqid/blob/master/global_config.py)
+**Install all required libraries**
+
+```shell
+cd flask && pip install -r requirement.txt
+npm install .
+```
+
+**Modify endpoints in global_config.py (https://github.com/mtang724/sqid/blob/master/global_config.py)**
 
 ```python
 HOST = "localhost"
