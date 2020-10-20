@@ -267,10 +267,10 @@ You may want to understand the meaning of the fields in `MAPPING_FILE`. For exam
 
 
 
-### Global Configuration file (gloabl_config.py)
+### Global Configuration file (gloabl_config.py) (https://github.com/mtang724/sqid/blob/master/global_config.py)
 
 ```python
-## Parameters can be change
+## Parameters that can be changed
 HOST = "localhost" # e.g. can be change to 'sitaware.isi.edu'
 SQID_PORT = 8052 # Port that will start the SQID service
 SPARQL_PORT = 10002 # Sparql endpoint port
@@ -292,15 +292,55 @@ See KGTK documentation: https://kgtk.readthedocs.io/en/latest/
 ### Building Wikidata triples and Mediawiki json files
 
 - Generate Wikidata Triples -- kgtk generate_wikidata_triples
+
+```python
+cat input_file.tsv \
+| kgtk generate_wikidata_triples -pf example_properties.tsv -w yes -pd yes > input_file.ttl
+```
+
 - Generate Mediawiki JSON -- kgtk generate-mediawiki-jsons
 
-### Load trile file into Blazegraph and load json file into ES
+```python
+cat input_file.tsv \
+| kgtk generate-mediawiki-jsons -pf example_properties.tsv -w yes -pd yes
+```
+
+### Load triples file into Blazegraph and load json file into ES
+
+Modify `ES_INDEX` in global_config.py (https://github.com/mtang724/sqid/blob/master/global_config.py)
 
 - Create Index for ES (flask/es/creat_index.py)
 
+```python
+# index name is defined in global_config file
+cd flask/es/ && python create_index.py
+```
+
 - Import all .jsonl files stored in the DATA_FOLDER_PATH variable (canbe configured in global_config.py). The loading is in bulk (flask/es/import_data.py)
 
+```python
+# mediawiki json files path(es_data) is defined in global_config file
+cd flask/es/ && python import_data.py
+```
+
 ### Start **Flask app** (python flask/app.py) first then Start **SQID** (npm run serve)
+
+Modify endpoints in global_config.py (https://github.com/mtang724/sqid/blob/master/global_config.py)
+
+```python
+HOST = "localhost"
+SQID_PORT = 8052
+SPARQL_PORT = 10002
+FLASK_PORT = 5556
+ES_INDEX = "kgtk_files"
+ELASTICSEARCH_PORT = 9200
+```
+
+**Run Global Configure File to generate endpoints for SQID and ES**
+
+```shell
+python global_config.py --is_generate True
+```
 
 **Flask application**
 
@@ -313,8 +353,6 @@ cd flask && python app.py
 ```shell
 npm run serve # development mode
 ```
-
-
 
 ## Development Path
 
