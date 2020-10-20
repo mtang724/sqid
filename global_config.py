@@ -1,9 +1,16 @@
+import argparse
+
+parser = argparse.ArgumentParser(description='Enter congiguration parameters')
+parser.add_argument('--is_generate', type=bool, help='is_generate', default=False)
+args = parser.parse_args()
+
 HOST = "localhost"
 SQID_PORT = 8052
 SPARQL_PORT = 10002
 FLASK_PORT = 5556
 ES_INDEX = "kgtk_files"
 ELASTICSEARCH_PORT = 9200
+is_generate = args.is_generate
 
 # Flask application config
 PROPERTY_FILES = [
@@ -37,8 +44,8 @@ endpoints_constrain = "export const MAX_SIMULTANEOUS_API_REQUESTS = {}\nexport c
 def write_sqid_endpoints(file_name, text):
 	with open(file_name, "w") as f:
 		f.write(text)
-
-write_sqid_endpoints("../src/api/endpoints.ts", endpoints_text + endpoints_constrain)
+if is_generate == True:
+    write_sqid_endpoints("src/api/endpoints.ts", endpoints_text + endpoints_constrain)
 
 endpoints_js_prefix = """
 "use strict";\n
@@ -49,5 +56,6 @@ endpoints_js_text = "exports.commonsEndpoint = '{}';\nexports.wikidataEndpoint =
 .format(commonsEndpoint, wikidataEndpoint, sparqlEndpoint, sqidEndpoint, customDomain)
 endpoints_js_constrain = "exports.MAX_SIMULTANEOUS_API_REQUESTS = {};\nexports.MAX_ENTITIES_PER_API_REQUEST = {};\nexports.MAX_SIMULTANEOUS_SPARQL_REQUESTS = {};\n"\
 .format(str(MAX_SIMULTANEOUS_API_REQUESTS), str(MAX_ENTITIES_PER_API_REQUEST), str(MAX_SIMULTANEOUS_SPARQL_REQUESTS))
-write_sqid_endpoints("../src/api/dist/endpoints.js", endpoints_js_prefix + endpoints_js_text + endpoints_js_constrain)
+if is_generate == True:
+    write_sqid_endpoints("src/api/dist/endpoints.js", endpoints_js_prefix + endpoints_js_text + endpoints_js_constrain)
 
