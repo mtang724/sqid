@@ -1,6 +1,11 @@
-ELASTICSEARCH_HOST = "http://localhost:9200"
-INDEX = "kgtk_files"
-DATA_FOLDER_PATH = "/home/mingyuet/sqid/flask/es/es_data"
+import sys 
+sys.path.append("../..") 
+from global_config import ES_INDEX, ELASTICSEARCH_HOST, ES_DATA_FOLDER_PATH
+
+
+ELASTICSEARCH_HOST = ELASTICSEARCH_HOST
+INDEX = ES_INDEX
+DATA_FOLDER_PATH = ES_DATA_FOLDER_PATH
 MAPPING_FILE = {
     "mappings": {
         # mapping type has been removed in elasticsearch7
