@@ -1,4 +1,5 @@
-# SQID (Macroscore)
+# SQID (KGTK)
+
 Slim and customizable sqid interface.
 
 [Introduction](#introduction)
@@ -264,21 +265,55 @@ You may want to understand the meaning of the fields in `MAPPING_FILE`. For exam
 2. `index` means whether Elasticsearch should index it or not. If a field is indexed, then it is searchable.
 3. `object` type means you don't care about what's in the field, just store it like a json object.
 
+
+
+### Global Configuration file (gloabl_config.py)
+
+```python
+## Parameters can be change
+HOST = "localhost" # e.g. can be change to 'sitaware.isi.edu'
+SQID_PORT = 8052 # Port that will start the SQID service
+SPARQL_PORT = 10002 # Sparql endpoint port
+FLASK_PORT = 5556 # Port for Flask App
+ES_INDEX = "kgtk_files" # Elastic Search Index name
+ELASTICSEARCH_PORT = 9200 # Elastic Search Port
+```
+
+
+
 ## Example
 
-Below is a step-by-step example that how the KG used for Macroscore PI meeting is built.
+### Below is a step-by-step example that how the pharma_subgraph KG used for SQID is built (https://github.com/mtang724/sqid/blob/master/SQID%20automatic%20pipeline.ipynb)
 
 ### Turning project data to KGTK file
 
-The very first step is to get all the data you need and come up with a data model. The 
-
-
+See KGTK documentation: https://kgtk.readthedocs.io/en/latest/
 
 ### Building Wikidata triples and Mediawiki json files
 
-
+- Generate Wikidata Triples -- kgtk generate_wikidata_triples
+- Generate Mediawiki JSON -- kgtk generate-mediawiki-jsons
 
 ### Load trile file into Blazegraph and load json file into ES
+
+- Create Index for ES (flask/es/creat_index.py)
+
+- Import all .jsonl files stored in the DATA_FOLDER_PATH variable (canbe configured in global_config.py). The loading is in bulk (flask/es/import_data.py)
+
+### Start **Flask app** (python flask/app.py) first then Start **SQID** (npm run serve)
+
+**Flask application**
+
+```shell
+cd flask && python app.py
+```
+
+**Start SQID**
+
+```shell
+npm run serve # development mode
+```
+
 
 
 ## Development Path
