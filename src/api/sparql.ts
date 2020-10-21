@@ -101,7 +101,11 @@ async function getRelatingStatements(
   entityId: EntityId,
   limit: number,
 ): Promise<SqidStatement[]> {
-  const result = await sparqlQuery(`SELECT DISTINCT ?it ?s ?p ?r WHERE {
+  const result = await sparqlQuery(`
+  prefix wikibase: <http://wikiba.se/ontology#>
+  prefix wd: <http://www.wikidata.org/entity/>
+  prefix wdt: <http://www.wikidata.org/prop/direct/>
+  SELECT DISTINCT ?it ?s ?p ?r WHERE {
   ?p wikibase:statementProperty ?ps ;
   wikibase:claim ?pc .
   ?s ?ps wd:${entityId} ;
@@ -118,7 +122,11 @@ function relatingStatementsForPropertyQuery(
   propertyId: EntityId,
   limit: number,
 ): string {
-  return `SELECT DISTINCT ?it ?s ?p ?r WHERE {
+  return `
+  prefix wikibase: <http://wikiba.se/ontology#>
+  prefix wd: <http://www.wikidata.org/entity/>
+  prefix wdt: <http://www.wikidata.org/prop/direct/>
+  SELECT DISTINCT ?it ?s ?p ?r WHERE {
 BIND(wd:${propertyId} AS ?p) .
 ?s ps:${propertyId} wd:${entityId} ;
   wikibase:rank ?r .
@@ -148,7 +156,11 @@ function propertySubjectsQuery(
   const obj = object ? `wd:${object}` : '[]'
   const limitClause = limit ? ` LIMIT ${limit} ` : ''
 
-  return `SELECT ?${resultVariable} ?${resultVariable}Label WHERE {{
+  return `
+  prefix wikibase: <http://wikiba.se/ontology#>
+  prefix wd: <http://www.wikidata.org/entity/>
+  prefix wdt: <http://www.wikidata.org/prop/direct/>
+  SELECT ?${resultVariable} ?${resultVariable}Label WHERE {{
   SELECT DISTINCT ?${resultVariable} WHERE {
     ?${resultVariable} wdt:${propertyId} ${obj} .
   }${limitClause}}
@@ -181,7 +193,11 @@ function propertyObjectsQuery(
   const subj = subject ? `wd:${subject}` : '[]'
   const limitClause = limit ? ` LIMIT ${limit} ` : ''
 
-  return `SELECT ?${resultVariable} ?${resultVariable}Label WHERE {{
+  return `
+  prefix wikibase: <http://wikiba.se/ontology#>
+  prefix wd: <http://www.wikidata.org/entity/>
+  prefix wdt: <http://www.wikidata.org/prop/direct/>
+  SELECT ?${resultVariable} ?${resultVariable}Label WHERE {{
   SELECT DISTINCT ?${resultVariable} WHERE {
     ${subj} wdt:${propertyId} ?${resultVariable} .
   }${limitClause}}
