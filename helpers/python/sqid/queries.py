@@ -1,4 +1,8 @@
-QUERY_CLASSES = """SELECT ?cl ?clLabel ?c
+QUERY_CLASSES = """
+prefix wikibase: <http://wikiba.se/ontology#>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?cl ?clLabel ?c
 WITH { SELECT ?cl (COUNT(*) AS ?c) WHERE {
    ?i wdt:P31 ?cl
   } GROUP BY ?cl
@@ -10,7 +14,11 @@ WHERE {
     ?cl rdfs:label ?clLabel .
   }
 }"""
-QUERY_CLASSSES_FALLBACK = """SELECT ?cl ?clLabel
+QUERY_CLASSSES_FALLBACK = """
+prefix wikibase: <http://wikiba.se/ontology#>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?cl ?clLabel
 WITH { SELECT DISTINCT ?cl WHERE {
     ?i wdt:P31 ?cl
   }
@@ -22,7 +30,11 @@ WHERE {
     ?cl rdfs:label ?clLabel .
   }
 }"""
-QUERY_PROPERTIES = """SELECT ?id ?idLabel ?type
+QUERY_PROPERTIES = """
+prefix wikibase: <http://wikiba.se/ontology#>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?id ?idLabel ?type
 WITH { SELECT ?id ?type WHERE {
     ?id a wikibase:Property ;
           wikibase:propertyType ?type .
@@ -35,6 +47,10 @@ WHERE {
     ?id rdfs:label ?idLabel .
   }
 }"""
-QUERY_PROPERTY_USAGE = """SELECT ?p (count(*) as ?c) WHERE {
+QUERY_PROPERTY_USAGE = """
+prefix wikibase: <http://wikiba.se/ontology#>
+prefix wd: <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+SELECT ?p (count(*) as ?c) WHERE {
   ?s ?p ?o .
 } GROUP BY ?p ORDER BY DESC(?c)"""
