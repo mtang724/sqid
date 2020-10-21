@@ -84,9 +84,9 @@ def _data_proxy(*args, **kwargs):
 @app.route("/entity/", methods=["GET"])
 def _wiki_proxy(*args, **kwargs):
     parsed_url = urlparse(request.url)
-    print (parsed_url)
+    #print (parsed_url)
     queries = parse_qs(parsed_url.query)
-    print (queries)
+    #print (queries)
     action = queries["action"][0]
     if action == "wbgetentities":
         keys = queries["ids"][0].split("|")
@@ -106,6 +106,10 @@ def _wiki_proxy(*args, **kwargs):
 def _sparql_proxy(*args, **kwargs):
     parsed_url = urlparse(request.url)
     queries = parse_qs(parsed_url.query)
+    #print (queries)
+    url=request.url.replace("/sparql", "").replace(
+            request.host_url, SPARQL_ENDPOINT).replace("=","=prefix%20wikibase%3A%20%3Chttp%3A%2F%2Fwikiba.se%2Fontology%23%3E%0Aprefix%20wd%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fentity%2F%3E%0Aprefix%20wdt%3A%20%3Chttp%3A%2F%2Fwww.wikidata.org%2Fprop%2Fdirect%2F%3E%0A%23Cats%0A")
+    #print (url)
     resp = requests.request(
         method=request.method,
         url=request.url.replace("/sparql", "").replace(
@@ -115,9 +119,10 @@ def _sparql_proxy(*args, **kwargs):
         data=request.get_data(),
         cookies=request.cookies,
         allow_redirects=True)
+    print(resp.content, resp.status_code)
     return Response(resp.content, resp.status_code, MOCK_HEADERS)
 
 
 # Run server
 if __name__ == "__main__":
-    app.run(debug=True, host=HOST, port=PORT)
+    app.run(debug=True, host="0.0.0.0", port=PORT)

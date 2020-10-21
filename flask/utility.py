@@ -65,6 +65,8 @@ def build_mock_stats_dict():
     return stats_dict
 
 def build_entity_dict(hit: dict, search_string: str, source:str):
+    if len(hit["labels"]) == 0:
+        return {}
     entity_dict = {
         "id": hit["id"],
         "title": hit["id"],
@@ -113,5 +115,5 @@ def build_wbsearch_dicts_es(es, search_string: str):
         obj = hit["_source"]
         if obj["id"].startswith("Q"):
             entity_dict = build_entity_dict(obj, search_string, "description")
-            temp_dict["search"].append()
+            temp_dict["search"].append(entity_dict)
     return temp_dict

@@ -6,7 +6,7 @@ args = parser.parse_args()
 
 HOST = "localhost"
 SQID_PORT = 8052
-SPARQL_PORT = 10002
+SPARQL_PORT = 11102
 FLASK_PORT = 5556
 ES_INDEX = "kgtk_files"
 ELASTICSEARCH_PORT = 9200
