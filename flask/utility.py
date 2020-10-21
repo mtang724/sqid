@@ -69,7 +69,7 @@ def build_entity_dict(hit: dict, search_string: str, source:str):
         return {}
     entity_dict = {
         "id": hit["id"],
-        "title": hit["id"],
+        "title": hit["labels"]["en"]["value"],
         "pageid": hit["pageid"],
         "repository": "local",
         "url": "{}/entity/{}".format(DOMAIN, hit["id"]),

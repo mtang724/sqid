@@ -106,10 +106,10 @@ def _wiki_proxy(*args, **kwargs):
 def _sparql_proxy(*args, **kwargs):
     parsed_url = urlparse(request.url)
     queries = parse_qs(parsed_url.query)
-    print (queries)
+    #print (queries)
     url=request.url.replace("/sparql", "").replace(
             request.host_url, SPARQL_ENDPOINT)
-    print (url)
+    #print (url)
     resp = requests.request(
         method=request.method,
         url=request.url.replace("/sparql", "").replace(
