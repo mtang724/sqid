@@ -1,9 +1,5 @@
 import argparse
 
-parser = argparse.ArgumentParser(description='Enter congiguration parameters')
-parser.add_argument('--is_generate', type=bool, help='is_generate', default=False)
-args = parser.parse_args()
-
 HOST = "localhost"
 SQID_PORT = 8051
 SPARQL_PORT = 11102
@@ -36,26 +32,31 @@ MAX_SIMULTANEOUS_API_REQUESTS = 25
 MAX_ENTITIES_PER_API_REQUEST = 50
 MAX_SIMULTANEOUS_SPARQL_REQUESTS = 5
 
-endpoints_text = "export const commonsEndpoint = '{}'\nexport const wikidataEndpoint = '{}'\nexport const sparqlEndpoint = '{}'\nexport const sqidEndpoint = '{}'\nexport const customDomain = '{}'\n"\
-.format(commonsEndpoint, wikidataEndpoint, sparqlEndpoint, sqidEndpoint, customDomain)
-endpoints_constrain = "export const MAX_SIMULTANEOUS_API_REQUESTS = {}\nexport const MAX_ENTITIES_PER_API_REQUEST = {}\nexport const MAX_SIMULTANEOUS_SPARQL_REQUESTS = {}\n"\
-.format(str(MAX_SIMULTANEOUS_API_REQUESTS), str(MAX_ENTITIES_PER_API_REQUEST), str(MAX_SIMULTANEOUS_SPARQL_REQUESTS))
-
 def write_sqid_endpoints(file_name, text):
 	with open(file_name, "w") as f:
 		f.write(text)
-if is_generate == True:
-    write_sqid_endpoints("src/api/endpoints.ts", endpoints_text + endpoints_constrain)
 
-endpoints_js_prefix = """
-"use strict";\n
-exports.__esModule = true;\n
-exports.MAX_SIMULTANEOUS_SPARQL_REQUESTS = exports.MAX_ENTITIES_PER_API_REQUEST = exports.MAX_SIMULTANEOUS_API_REQUESTS = exports.customDomain = exports.sqidEndpoint = exports.sparqlEndpoint = exports.wikidataEndpoint = exports.commonsEndpoint = void 0;\n
-"""
-endpoints_js_text = "exports.commonsEndpoint = '{}';\nexports.wikidataEndpoint = '{}';\nexports.sparqlEndpoint = '{}';\nexports.sqidEndpoint = '{}';\nexports.customDomain = '{}';\n"\
-.format(commonsEndpoint, wikidataEndpoint, sparqlEndpoint, sqidEndpoint, customDomain)
-endpoints_js_constrain = "exports.MAX_SIMULTANEOUS_API_REQUESTS = {};\nexports.MAX_ENTITIES_PER_API_REQUEST = {};\nexports.MAX_SIMULTANEOUS_SPARQL_REQUESTS = {};\n"\
-.format(str(MAX_SIMULTANEOUS_API_REQUESTS), str(MAX_ENTITIES_PER_API_REQUEST), str(MAX_SIMULTANEOUS_SPARQL_REQUESTS))
-if is_generate == True:
-    write_sqid_endpoints("src/api/dist/endpoints.js", endpoints_js_prefix + endpoints_js_text + endpoints_js_constrain)
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(description='Enter congiguration parameters')
+	parser.add_argument('--is_generate', type=bool, help='is_generate', default=False)
+	args = parser.parse_args()
+	endpoints_text = "export const commonsEndpoint = '{}'\nexport const wikidataEndpoint = '{}'\nexport const sparqlEndpoint = '{}'\nexport const sqidEndpoint = '{}'\nexport const customDomain = '{}'\n"\
+	.format(commonsEndpoint, wikidataEndpoint, sparqlEndpoint, sqidEndpoint, customDomain)
+	endpoints_constrain = "export const MAX_SIMULTANEOUS_API_REQUESTS = {}\nexport const MAX_ENTITIES_PER_API_REQUEST = {}\nexport const MAX_SIMULTANEOUS_SPARQL_REQUESTS = {}\n"\
+	.format(str(MAX_SIMULTANEOUS_API_REQUESTS), str(MAX_ENTITIES_PER_API_REQUEST), str(MAX_SIMULTANEOUS_SPARQL_REQUESTS))
+
+	if is_generate == True:
+	    write_sqid_endpoints("src/api/endpoints.ts", endpoints_text + endpoints_constrain)
+
+	endpoints_js_prefix = """
+	"use strict";\n
+	exports.__esModule = true;\n
+	exports.MAX_SIMULTANEOUS_SPARQL_REQUESTS = exports.MAX_ENTITIES_PER_API_REQUEST = exports.MAX_SIMULTANEOUS_API_REQUESTS = exports.customDomain = exports.sqidEndpoint = exports.sparqlEndpoint = exports.wikidataEndpoint = exports.commonsEndpoint = void 0;\n
+	"""
+	endpoints_js_text = "exports.commonsEndpoint = '{}';\nexports.wikidataEndpoint = '{}';\nexports.sparqlEndpoint = '{}';\nexports.sqidEndpoint = '{}';\nexports.customDomain = '{}';\n"\
+	.format(commonsEndpoint, wikidataEndpoint, sparqlEndpoint, sqidEndpoint, customDomain)
+	endpoints_js_constrain = "exports.MAX_SIMULTANEOUS_API_REQUESTS = {};\nexports.MAX_ENTITIES_PER_API_REQUEST = {};\nexports.MAX_SIMULTANEOUS_SPARQL_REQUESTS = {};\n"\
+	.format(str(MAX_SIMULTANEOUS_API_REQUESTS), str(MAX_ENTITIES_PER_API_REQUEST), str(MAX_SIMULTANEOUS_SPARQL_REQUESTS))
+	if is_generate == True:
+	    write_sqid_endpoints("src/api/dist/endpoints.js", endpoints_js_prefix + endpoints_js_text + endpoints_js_constrain)
 
