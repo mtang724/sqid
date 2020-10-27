@@ -39,7 +39,7 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Enter congiguration parameters')
 	parser.add_argument('--is_generate', type=bool, help='is_generate', default=False)
 	args = parser.parse_args()
-        is_generate = args.is_generate
+	is_generate = args.is_generate
 	endpoints_text = "export const commonsEndpoint = '{}'\nexport const wikidataEndpoint = '{}'\nexport const sparqlEndpoint = '{}'\nexport const sqidEndpoint = '{}'\nexport const customDomain = '{}'\n"\
 	.format(commonsEndpoint, wikidataEndpoint, sparqlEndpoint, sqidEndpoint, customDomain)
 	endpoints_constrain = "export const MAX_SIMULTANEOUS_API_REQUESTS = {}\nexport const MAX_ENTITIES_PER_API_REQUEST = {}\nexport const MAX_SIMULTANEOUS_SPARQL_REQUESTS = {}\n"\
