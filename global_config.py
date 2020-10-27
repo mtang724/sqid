@@ -5,7 +5,7 @@ parser.add_argument('--is_generate', type=bool, help='is_generate', default=Fals
 args = parser.parse_args()
 
 HOST = "localhost"
-SQID_PORT = 8052
+SQID_PORT = 8051
 SPARQL_PORT = 11102
 FLASK_PORT = 5556
 ES_INDEX = "kgtk_files"
