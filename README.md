@@ -361,6 +361,16 @@ cd flask && python app.py
 npm run serve # development mode
 ```
 
+## Automatic Pipeline
+
+Run [papermill](https://github.com/nteract/papermill) to parameterize and execute [Jupyter Notebook](https://github.com/mtang724/sqid/blob/master/SQID_automatic_pipeline.ipynb)
+
+```shell
+papermill SQID_automatic_pipeline.ipynb SQID_automatic_pipeline_out.ipynb -p kgtk_file kgtk_files/pharma_subgraph.tsv
+```
+
+kgtk_files/pharma_subgraph.tsv can be replaced by any `KGTK` TSV file
+
 ## Development Path
 
 There are still a lot to do to make SQID more robust and easy to use. 
